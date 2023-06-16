@@ -205,4 +205,34 @@ public class CdfPluginPropertiesLocators {
     String xpath = "//*[@data-cy='" + pluginProperty + "']//*[@data-cy='" + row + "']//button[@data-cy='add-row']";
     return SeleniumDriver.getDriver().findElement(By.xpath(xpath));
   }
+
+  public static WebElement locateButton(String button) {
+    String xpath = "//*[contains(text(),'" + button + "')]";
+    return SeleniumDriver.getDriver().findElement(By.xpath(xpath));
+  }
+
+  public static WebElement locateSourcePluginNameInList(String pluginName) {
+    String xpath = "//div[contains(text(),'" + pluginName + "')]";
+    return SeleniumDriver.getDriver().findElement(By.xpath(xpath));
+  }
+
+  @FindBy(how = How.XPATH, using = "//span[contains(text(),'Deploy Replication Job')]")
+  public static WebElement deployReplicationPipeline;
+
+  @FindBy(how = How.XPATH, using = "//*[contains(text(), 'Running')]")
+  public static WebElement running;
+
+  public static By start = By.xpath("//*[contains(@class, 'icon-play ')]");
+
+  @FindBy(how = How.XPATH, using = "//*[contains(text(), 'Logs')]")
+  public static WebElement logs;
+
+  @FindBy(how = How.XPATH, using = "(//*[contains(text(), 'View')])[1]")
+  public static WebElement advancedLogs;
+
+  @FindBy(how = How.XPATH, using = "//*[contains(@class, 'icon-stop')]")
+  public static WebElement stop;
+
+  @FindBy(how = How.XPATH, using = "//*[@class='text-danger']/span")
+  public static WebElement rowError;
 }

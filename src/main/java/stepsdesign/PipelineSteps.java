@@ -23,14 +23,18 @@ import io.cdap.e2e.pages.actions.CdfStudioActions;
 import io.cdap.e2e.pages.locators.CdfStudioLocators;
 import io.cdap.e2e.utils.CdfHelper;
 import io.cdap.e2e.utils.ConstantsUtil;
+import io.cdap.e2e.utils.ElementHelper;
 import io.cdap.e2e.utils.PluginPropertyUtils;
+import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.SeleniumHelper;
 import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -658,5 +662,54 @@ public class PipelineSteps implements CdfHelper {
   @Then("Verify the invalid connection error message: {string} on the footer")
   public void verifyInvalidConnectionErrorMessage(String errorMessageLocation) {
     CdfConnectionActions.verifyConnectionErrorMessage(errorMessageLocation);
+  }
+
+  @Given("Open DataFusion Project with replication to configure pipeline")
+  public void openDataFusionProjectWithReplicationToConfigurePipeline() throws IOException, InterruptedException {
+    openCdf();
+    SeleniumDriver.getDriver().get(SeleniumDriver.getDriver().getCurrentUrl().replace(
+    SeleniumHelper.readParameters(ConstantsUtil.CDFURL), SeleniumHelper.readParameters(ConstantsUtil.REPLICATION_URL)));
+  }
+
+  @When("Enter input plugin property: {string} with pipelineName")
+  public void enterInputPluginPropertyWithPipelineName(String pluginProperty) {
+    WebElement pluginPropertyInput = PluginPropertyUtils.getInputPluginPropertyElement(pluginProperty);
+    String pipelineName = "TestPipeline-" + RandomStringUtils.randomAlphanumeric(10);
+    ElementHelper.sendKeys(pluginPropertyInput, pipelineName);
+  }
+
+  @And("Click on the button {string}")
+  public void clickOnTheButton(String button) throws InterruptedException {
+    CdfPluginPropertiesActions.clickOnPageButton(button);
+  }
+
+  @When("Select Source plugin: {string} from the replication plugins list")
+  public void selectSourcePluginFromTheReplicationPluginsList(String pluginName) {
+    CdfPluginPropertiesActions.selectReplicationSourcePlugin(pluginName);
+  }
+
+  @Then("Deploy the replication pipeline")
+  public void deployTheReplicationPipeline() {
+    CdfPluginPropertiesActions.deployReplicationPipeline();
+  }
+
+  @Then("Run the replication Pipeline")
+  public void runTheReplicationPipeline() {
+    CdfPluginPropertiesActions.runTheReplicationPipeline();
+  }
+
+  @Then("Open the Advanced logs")
+  public void openTheAdvancedLogs() {
+    CdfPluginPropertiesActions.openAdvancedLogs();
+  }
+
+  @Then("Close the replication pipeline logs and stop the pipeline")
+  public void closeTheReplicationPipelineLogsAndStopThePipeline() {
+    CdfPluginPropertiesActions.closeTheReplicationPipelineLogsAndStopThePipeline();
+  }
+
+  @Then("Verify that the Plugin is displaying an error message: {string}")
+  public void verifyErrorMessageIsDisplayed (String errorMessage) {
+    CdfPluginPropertiesActions.verifyErrorMessage(errorMessage);
   }
 }
