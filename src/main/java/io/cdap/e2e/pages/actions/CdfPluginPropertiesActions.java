@@ -1063,4 +1063,12 @@ public class CdfPluginPropertiesActions {
       AssertionHelper.verifyElementDisplayed(CdfPluginPropertiesLocators.rowError);
       AssertionHelper.verifyElementContainsText(CdfPluginPropertiesLocators.rowError, expectedErrorMessage);
   }
+
+  /**
+   * Check whether Review Assessment Page is loaded completely
+   */
+  public static void waitTillTheReviewAssessmentPageLoaded() {
+    WaitHelper.waitForElementToBeOptionallyDisplayed(CdfPluginPropertiesLocators.reviewAssessment(),
+                                                     ConstantsUtil.DEFAULT_TIMEOUT_SECONDS);
+  }
 }

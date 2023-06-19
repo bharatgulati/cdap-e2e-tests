@@ -709,7 +709,12 @@ public class PipelineSteps implements CdfHelper {
   }
 
   @Then("Verify that the Plugin is displaying an error message: {string}")
-  public void verifyErrorMessageIsDisplayed (String errorMessage) {
+  public void verifyThatThePluginIsDisplayingAnErrorMessage(String errorMessage) {
     CdfPluginPropertiesActions.verifyErrorMessage(errorMessage);
+  }
+
+  @Then("Wait till the Review Assessment page is loaded in replication")
+  public void waitTillTheReviewAssessmentPageIsLoadedInReplication() {
+    CdfPluginPropertiesActions.waitTillTheReviewAssessmentPageLoaded();
   }
 }

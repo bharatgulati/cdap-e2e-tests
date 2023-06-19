@@ -235,4 +235,8 @@ public class CdfPluginPropertiesLocators {
 
   @FindBy(how = How.XPATH, using = "//*[@class='text-danger']/span")
   public static WebElement rowError;
+
+  public static By reviewAssessment() {
+    return By.xpath("//h4[contains(text(), 'Review assessment')]");
+  }
 }
