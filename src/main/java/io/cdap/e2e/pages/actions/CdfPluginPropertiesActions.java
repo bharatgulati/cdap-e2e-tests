@@ -28,12 +28,14 @@ import io.cdap.e2e.utils.SeleniumDriver;
 import io.cdap.e2e.utils.SeleniumHelper;
 import io.cdap.e2e.utils.WaitHelper;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1018,14 +1020,14 @@ public class CdfPluginPropertiesActions {
     }
 
   /**
-   * Click on Start for the replication pipeline to start
+   * Start the replication pipeline
    */
   public static void startReplicationPipeline() {
     ElementHelper.clickIfDisplayed(CdfPluginPropertiesLocators.start, ConstantsUtil.DEFAULT_TIMEOUT_SECONDS);
   }
 
   /**
-   * Check for the pipeline status is running
+   * Start the replication pipeline and Check for the pipeline status is running
    */
   public static void runTheReplicationPipeline() {
     startReplicationPipeline();
@@ -1070,5 +1072,27 @@ public class CdfPluginPropertiesActions {
   public static void waitTillTheReviewAssessmentPageLoaded() {
     WaitHelper.waitForElementToBeOptionallyDisplayed(CdfPluginPropertiesLocators.reviewAssessment(),
                                                      ConstantsUtil.DEFAULT_TIMEOUT_SECONDS);
+  }
+
+  /**
+   * Enter value in the Plugin Property (input)
+   *
+   * @param pluginProperty @data-cy attribute value of Plugin Property.
+   *                       If pluginProperty is present in {@link ConstantsUtil#DEFAULT_DATACY_ATTRIBUTES_FILE}
+   *                       then its data-cy is fetched from it
+   *                       else pluginProperty is used as it is.
+   */
+  public static void enterInputPropertyWithValue(String pluginProperty) {
+    WebElement pluginPropertyInput = PluginPropertyUtils.getInputPluginPropertyElement(pluginProperty);
+    String pipelineName = "TestPipeline-" + RandomStringUtils.randomAlphanumeric(10);
+    ElementHelper.sendKeys(pluginPropertyInput, pipelineName);
+  }
+
+  /**
+   * Replace Cdf Url with Replication Url
+   */
+  public static void openCdfWithReplication() throws IOException {
+    SeleniumDriver.getDriver().get(SeleniumDriver.getDriver().getCurrentUrl().replace(
+    SeleniumHelper.readParameters(ConstantsUtil.CDFURL), SeleniumHelper.readParameters(ConstantsUtil.REPLICATION_URL)));
   }
 }

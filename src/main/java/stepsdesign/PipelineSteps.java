@@ -667,19 +667,16 @@ public class PipelineSteps implements CdfHelper {
   @Given("Open DataFusion Project with replication to configure pipeline")
   public void openDataFusionProjectWithReplicationToConfigurePipeline() throws IOException, InterruptedException {
     openCdf();
-    SeleniumDriver.getDriver().get(SeleniumDriver.getDriver().getCurrentUrl().replace(
-    SeleniumHelper.readParameters(ConstantsUtil.CDFURL), SeleniumHelper.readParameters(ConstantsUtil.REPLICATION_URL)));
+    CdfPluginPropertiesActions.openCdfWithReplication();
   }
 
   @When("Enter input plugin property: {string} with pipelineName")
   public void enterInputPluginPropertyWithPipelineName(String pluginProperty) {
-    WebElement pluginPropertyInput = PluginPropertyUtils.getInputPluginPropertyElement(pluginProperty);
-    String pipelineName = "TestPipeline-" + RandomStringUtils.randomAlphanumeric(10);
-    ElementHelper.sendKeys(pluginPropertyInput, pipelineName);
+    CdfPluginPropertiesActions.enterInputPropertyWithValue(pluginProperty);
   }
 
-  @And("Click on the button {string}")
-  public void clickOnTheButton(String button) throws InterruptedException {
+  @And("Click on the Next button in Replication mode {string}")
+  public void clickOnTheNextButtonInReplicationMode(String button) throws InterruptedException {
     CdfPluginPropertiesActions.clickOnPageButton(button);
   }
 

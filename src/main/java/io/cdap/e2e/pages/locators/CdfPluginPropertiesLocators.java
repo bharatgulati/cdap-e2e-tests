@@ -227,13 +227,13 @@ public class CdfPluginPropertiesLocators {
   @FindBy(how = How.XPATH, using = "//*[contains(text(), 'Logs')]")
   public static WebElement logs;
 
-  @FindBy(how = How.XPATH, using = "(//*[contains(text(), 'View')])[1]")
+  @FindBy(how = How.XPATH, using = "//button[@data-testid='view-advanced-logs']")
   public static WebElement advancedLogs;
 
   @FindBy(how = How.XPATH, using = "//*[contains(@class, 'icon-stop')]")
   public static WebElement stop;
 
-  @FindBy(how = How.XPATH, using = "//*[@class='text-danger']/span")
+  @FindBy(how = How.XPATH, using = "//h5[. = 'Error']/following-sibling::*")
   public static WebElement rowError;
 
   public static By reviewAssessment() {
