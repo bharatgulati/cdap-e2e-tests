@@ -714,4 +714,9 @@ public class PipelineSteps implements CdfHelper {
   public void waitTillTheReviewAssessmentPageIsLoadedInReplication() {
     CdfPluginPropertiesActions.waitTillTheReviewAssessmentPageLoaded();
   }
+
+  @Then("Wait till the Configure Advanced Properties page is loaded in replication")
+  public void waitTillTheConfigureAdvancedPropertiesPageIsLoadedInReplication() {
+    CdfPluginPropertiesActions.waitTillTheConfigureAdvancedPropertiesPageLoaded();
+  }
 }

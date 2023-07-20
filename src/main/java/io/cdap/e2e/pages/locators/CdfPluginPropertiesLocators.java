@@ -239,4 +239,8 @@ public class CdfPluginPropertiesLocators {
   public static By reviewAssessment() {
     return By.xpath("//h4[contains(text(), 'Review assessment')]");
   }
+
+  public static By configureProperties() {
+    return By.xpath("//h3[contains(text(), 'Configure advanced properties')]");
+  }
 }

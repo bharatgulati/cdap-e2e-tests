@@ -1075,6 +1075,14 @@ public class CdfPluginPropertiesActions {
   }
 
   /**
+   * Check whether Configure Advanced Properties Page is loaded completely
+   */
+  public static void waitTillTheConfigureAdvancedPropertiesPageLoaded() {
+    WaitHelper.waitForElementToBeOptionallyDisplayed(CdfPluginPropertiesLocators.configureProperties(),
+                                                     ConstantsUtil.DEFAULT_TIMEOUT_SECONDS);
+  }
+
+  /**
    * Enter value in the Plugin Property (input)
    *
    * @param pluginProperty @data-cy attribute value of Plugin Property.
