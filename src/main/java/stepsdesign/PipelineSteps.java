@@ -664,8 +664,8 @@ public class PipelineSteps implements CdfHelper {
     CdfConnectionActions.verifyConnectionErrorMessage(errorMessageLocation);
   }
 
-  @Given("Open DataFusion Project with replication to configure pipeline")
-  public void openDataFusionProjectWithReplicationToConfigurePipeline() throws IOException, InterruptedException {
+  @Given("Open DataFusion Project with replication to configure replication job")
+  public void openDataFusionProjectWithReplicationToConfigureReplicationJob() throws IOException, InterruptedException {
     openCdf();
     CdfPluginPropertiesActions.openCdfWithReplication();
   }
