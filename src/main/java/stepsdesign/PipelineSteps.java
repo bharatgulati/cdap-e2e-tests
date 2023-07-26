@@ -675,8 +675,8 @@ public class PipelineSteps implements CdfHelper {
     CdfPluginPropertiesActions.enterInputPropertyWithValue(pluginProperty);
   }
 
-  @And("Click on the Next button in Replication mode {string}")
-  public void clickOnTheNextButtonInReplicationMode(String button) throws InterruptedException {
+  @And("Click on the {string} button in replication to navigate")
+  public void clickOnTheButtonInReplicationMode(String button) throws InterruptedException {
     CdfPluginPropertiesActions.clickOnPageButton(button);
   }
 
